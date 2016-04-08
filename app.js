@@ -18,6 +18,7 @@ app.post('/callback', function(req, res) {
     var results = req.body.result;
     _.each(results, function(msg){
         console.log(msg.content.text);
+        console.log(msg.from);
 
         var request = require('superagent');
         request
@@ -27,10 +28,10 @@ app.post('/callback', function(req, res) {
             .set('X-Line-ChannelSecret', process.env.SECRET)
             .set('X-Line-Trusted-User-With-ACL', process.env.MID)
             .send({
-                "to": msg.content.from,
+                "to": msg.from,
                 "toChannel": "1383378250",
                 "eventType": "138311608800106203",
-                "content": "Hello!!"
+                "content": msg.content.text
             })
             .end(function(res){
             });
