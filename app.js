@@ -13,9 +13,13 @@ app.get('/', function(req, res) {
 app.post('/callback', function(req, res) {
 
     console.log(req.body);
-    var result = req.body.result;
+    var results = req.body.result;
+    var to = results.toChannel;
 
-    _.each(result, function(msg){
+    console.log(results);
+    console.log(to);
+
+    _.each(results, function(msg){
         console.log(msg);
     })
 
