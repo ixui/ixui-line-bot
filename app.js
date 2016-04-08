@@ -6,20 +6,16 @@ var bodyParser = require('body-parser');
 app.use(bodyParser());
 app.set('port', (process.env.PORT || 5000));
 
+// 生きてるか確認するためのHello World
 app.get('/', function(req, res) {
   res.send('Hello World!');
 });
 
+// LineからのコールバックURL
 app.post('/callback', function(req, res) {
-
-    // console.log("----------------------------------");
-    // console.log(req.body);
-    // console.log("----------------------------------");
 
     var results = req.body.result;
     _.each(results, function(msg){
-        console.log(msg.content.text);
-        console.log(msg.from);
 
         var request = require('superagent');
         require('superagent-proxy')(request);
@@ -37,13 +33,17 @@ app.post('/callback', function(req, res) {
             .set('X-Line-ChannelID', process.env.CHANNEL_ID)
             .set('X-Line-ChannelSecret', process.env.SECRET)
             .set('X-Line-Trusted-User-With-ACL', process.env.MID)
-            .end(function(res){
-                console.log(res);
+            .end(function(err, res){
+                if (err || !res.ok) {
+                    console.error(err);
+                } else {
+                    // No Error
+                }
             });
 
     })
 
-  res.send('Hello World!');
+    res.status(200).send("ok")
 });
 
 app.listen(app.get('port'), function() {
