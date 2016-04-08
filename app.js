@@ -12,17 +12,21 @@ app.get('/', function(req, res) {
 
 app.post('/callback', function(req, res) {
 
-    console.log("----------------------------------");
-    console.log(req.body);
-    console.log("----------------------------------");
+    // console.log("----------------------------------");
+    // console.log(req.body);
+    // console.log("----------------------------------");
+
     var results = req.body.result;
     _.each(results, function(msg){
         console.log(msg.content.text);
         console.log(msg.from);
 
         var request = require('superagent');
+        require('superagent-proxy')(request);
+
         request
             .post('https://trialbot-api.line.me/v1/events')
+            .proxy(process.env.FIXIE_URL)
             .set('Content-Type', 'application/json; charset=UTF-8')
             .set('X-Line-ChannelID', process.env.CHANNEL_ID)
             .set('X-Line-ChannelSecret', process.env.SECRET)
@@ -34,6 +38,7 @@ app.post('/callback', function(req, res) {
                 "content": msg.content.text
             })
             .end(function(res){
+                console.log(res);
             });
 
     })
