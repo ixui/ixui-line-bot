@@ -18,18 +18,24 @@ app.post('/callback', function(req, res) {
     var results = req.body.result;
     _.each(results, function(msg){
         console.log(msg.content.text);
-    })
 
-    // var request = require('superagent');
-    // request
-    //     .post('https://trialbot-api.line.me/v1/events')
-    //     .end(function(res){
-    //       if (res.ok) {
-    //         console.log(res.body.name);
-    //       } else {
-    //             console.log('error');
-    //       }
-    //     });
+        var request = require('superagent');
+        request
+            .post('https://trialbot-api.line.me/v1/events')
+            .set('Content-Type', 'application/json; charset=UTF-8')
+            .set('X-Line-ChannelID', process.env.CHANNEL_ID)
+            .set('X-Line-ChannelSecret', process.env.SECRET)
+            .set('X-Line-Trusted-User-With-ACL', process.env.MID)
+            .send({
+                "to": msg.content.from,
+                "toChannel": "1383378250",
+                "eventType": "138311608800106203",
+                "content": "Hello!!"
+            })
+            .end(function(res){
+            });
+
+    })
 
   res.send('Hello World!');
 });
