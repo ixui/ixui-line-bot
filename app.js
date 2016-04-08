@@ -27,9 +27,9 @@ app.post('/callback', function(req, res) {
         request
             .post('https://trialbot-api.line.me/v1/events')
             .proxy(process.env.FIXIE_URL)
-            .send({
-                to: msg.from,
-                toChannel: "1383378250",
+            .send(JSON.stringify({
+                to: [msg.from.toString()],
+                toChannel: 1383378250,
                 eventType: "138311608800106203",
                 content: msg.content.text
             })
