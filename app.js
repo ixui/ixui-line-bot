@@ -12,10 +12,8 @@ app.get('/', function(req, res) {
 
 app.post('/callback', function(req, res) {
 
-    console.log(req);
     console.log(req.body);
     var result = req.body.result;
-    console.log(result);
 
     _.each(result, function(msg){
         console.log(msg);
