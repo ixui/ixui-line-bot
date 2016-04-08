@@ -27,12 +27,14 @@ app.post('/callback', function(req, res) {
         request
             .post('https://trialbot-api.line.me/v1/events')
             .proxy(process.env.FIXIE_URL)
-            .send(JSON.stringify({
-                to: [msg.from.toString()],
-                toChannel: 1383378250,
-                eventType: "138311608800106203",
-                content: msg.content.text
-            })
+            .send(
+                JSON.stringify({
+                    to: [msg.from.toString()],
+                    toChannel: 1383378250,
+                    eventType: "138311608800106203",
+                    content: msg.content.text
+                })
+            )
             .set('Content-Type', 'application/json; charset=UTF-8')
             .set('X-Line-ChannelID', process.env.CHANNEL_ID)
             .set('X-Line-ChannelSecret', process.env.SECRET)
