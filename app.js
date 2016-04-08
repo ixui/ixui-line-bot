@@ -3,7 +3,7 @@ var express = require('express');
 var app = express();
 
 var bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser());
 app.set('port', (process.env.PORT || 5000));
 
 app.get('/', function(req, res) {
@@ -12,6 +12,7 @@ app.get('/', function(req, res) {
 
 app.post('/callback', function(req, res) {
 
+    console.log(req);
     console.log(req.body);
     var result = req.body.result;
     console.log(result);
