@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/ixui/ixui-line-bot/issues"
   },
-  "homepage": "https://github.com/ixui/ixui-line-bot#readme"
+  "homepage": "https://github.com/ixui/ixui-line-bot#readme",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
 }
