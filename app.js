@@ -30,6 +30,7 @@ app.post('/callback', function(req, res) {
                 eventType: "138311608800106203",
                 content: msg.content.text
             })
+        )
 
         request
             .post('https://trialbot-api.line.me/v1/events')
