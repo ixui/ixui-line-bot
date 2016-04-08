@@ -1,0 +1,23 @@
+{
+  "name": "ixui-line-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ixui/ixui-line-bot.git"
+  },
+  "keywords": [
+    "line",
+    "bot"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ixui/ixui-line-bot/issues"
+  },
+  "homepage": "https://github.com/ixui/ixui-line-bot#readme"
+}
