@@ -6,11 +6,11 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: true}));
 app.set('port', (process.env.PORT || 5000));
 
-app.get('/', function(request, response) {
-  response.send('Hello World!');
+app.get('/', function(req, res) {
+  res.send('Hello World!');
 });
 
-app.post('/callback', function(request, response) {
+app.post('/callback', function(req, res) {
 
     console.log(req.body);
     var result = req.body.result;
