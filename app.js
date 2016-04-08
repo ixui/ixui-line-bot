@@ -1,13 +1,38 @@
-var express = require('express')
-var app = express()
+var _ = require('lodash');
+var express = require('express');
+var app = express();
 
-app.set('port', (process.env.PORT || 5000))
-app.use(express.static(__dirname + '/public'))
+var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({extended: true}));
+app.set('port', (process.env.PORT || 5000));
 
 app.get('/', function(request, response) {
-  response.send('Hello World!')
-})
+  response.send('Hello World!');
+});
+
+app.post('/callback', function(request, response) {
+
+    console.log(req.body);
+    var result = req.body.result;
+    console.log(result);
+
+    _.each(result, function(msg){
+        console.log(msg);
+    })
+
+    // var request = require('superagent');
+    // request
+    //     .post('https://trialbot-api.line.me/v1/events')
+    //     .end(function(res){
+    //       if (res.ok) {
+    //         console.log(res.body.name);
+    //       } else {
+    //             console.log('error');
+    //       }
+    //     });
+
+});
 
 app.listen(app.get('port'), function() {
   console.log("Node app is running at localhost:" + app.get('port'))
-})
+});
