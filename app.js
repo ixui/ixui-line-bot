@@ -24,14 +24,6 @@ app.post('/callback', function(req, res) {
         var request = require('superagent');
         require('superagent-proxy')(request);
 
-        console.log(JSON.stringify({
-                to: [msg.from.toString()],
-                toChannel: 1383378250,
-                eventType: "138311608800106203",
-                content: msg.content.text
-            })
-        )
-
         request
             .post('https://trialbot-api.line.me/v1/events')
             .proxy(process.env.FIXIE_URL)
@@ -39,7 +31,7 @@ app.post('/callback', function(req, res) {
                 to: [msg.from.toString()],
                 toChannel: 1383378250,
                 eventType: "138311608800106203",
-                content: msg.content.text
+                content: msg.content
             })
             .set('Content-Type', 'application/json; charset=UTF-8')
             .set('X-Line-ChannelID', process.env.CHANNEL_ID)
