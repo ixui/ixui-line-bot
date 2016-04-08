@@ -12,15 +12,12 @@ app.get('/', function(req, res) {
 
 app.post('/callback', function(req, res) {
 
+    console.log("----------------------------------");
     console.log(req.body);
+    console.log("----------------------------------");
     var results = req.body.result;
-    var to = results.toChannel;
-
-    console.log(results);
-    console.log(to);
-
     _.each(results, function(msg){
-        console.log(msg);
+        console.log(msg.content.text);
     })
 
     // var request = require('superagent');
