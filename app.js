@@ -39,7 +39,7 @@ app.post('/callback', function(req, res) {
                             to: [msg.content.from.toString()],
                             toChannel: 1383378250,
                             eventType: "138311608800106203",
-                            content: res.body.message
+                            content: res.body.result
                         })
                         .set('Content-Type', 'application/json; charset=UTF-8')
                         .set('X-Line-ChannelID', process.env.CHANNEL_ID)
