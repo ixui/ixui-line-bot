@@ -22,10 +22,9 @@ app.post('/callback', function(req, res) {
 
         request
             .post('https://chatbot-api.userlocal.jp/api/chat')
-            .proxy(process.env.FIXIE_URL)
             .send({
                 key: process.env.USER_LOCAL_API_KEY,
-                message: msg.content
+                message: encodeURI(msg.content)
             })
             .end(function(err, res){
                 if (err || !res.ok) {
