@@ -20,13 +20,11 @@ app.post('/callback', function(req, res) {
         var request = require('superagent');
         require('superagent-proxy')(request);
 
-        console.log(msg.content)
-
         request
             .post('https://chatbot-api.userlocal.jp/api/chat')
             .send({
                 key: process.env.USER_LOCAL_API_KEY,
-                message: encodeURIComponent(msg.content),
+                message: encodeURIComponent(msg.content.text),
                 bot_name: "めぐみん",
                 platform: "line",
                 user_id: msg.content.from.toString()
