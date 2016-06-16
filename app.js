@@ -21,23 +21,38 @@ app.post('/callback', function(req, res) {
         require('superagent-proxy')(request);
 
         request
-            .post('https://trialbot-api.line.me/v1/events')
+            .post('https://chatbot-api.userlocal.jp/api/chat')
             .proxy(process.env.FIXIE_URL)
             .send({
-                to: [msg.content.from.toString()],
-                toChannel: 1383378250,
-                eventType: "138311608800106203",
-                content: msg.content
+                key: process.env.USER_LOCAL_API_KEY,
+                message: msg.content
             })
-            .set('Content-Type', 'application/json; charset=UTF-8')
-            .set('X-Line-ChannelID', process.env.CHANNEL_ID)
-            .set('X-Line-ChannelSecret', process.env.SECRET)
-            .set('X-Line-Trusted-User-With-ACL', process.env.MID)
             .end(function(err, res){
                 if (err || !res.ok) {
                     console.error(err);
                 } else {
-                    // No Error
+
+                    request
+                        .post('https://trialbot-api.line.me/v1/events')
+                        .proxy(process.env.FIXIE_URL)
+                        .send({
+                            to: [msg.content.from.toString()],
+                            toChannel: 1383378250,
+                            eventType: "138311608800106203",
+                            content: res.body.message
+                        })
+                        .set('Content-Type', 'application/json; charset=UTF-8')
+                        .set('X-Line-ChannelID', process.env.CHANNEL_ID)
+                        .set('X-Line-ChannelSecret', process.env.SECRET)
+                        .set('X-Line-Trusted-User-With-ACL', process.env.MID)
+                        .end(function(err, res){
+                            if (err || !res.ok) {
+                                console.error(err);
+                            } else {
+                                // No Error
+                            }
+                        });
+
                 }
             });
 
