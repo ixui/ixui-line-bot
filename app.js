@@ -20,11 +20,17 @@ app.post('/callback', function(req, res) {
         var request = require('superagent');
         require('superagent-proxy')(request);
 
+        console.log("*********************************************************************")
+        console.log(msg.content.text)
+        console.log("*********************************************************************")
+        console.log(msg.content)
+        console.log("*********************************************************************")
+
         request
             .post('https://chatbot-api.userlocal.jp/api/chat')
             .send({
                 key: process.env.USER_LOCAL_API_KEY,
-                message: encodeURIComponent(msg.content.text),
+                message: encodeURIComponent(msg.content),
                 bot_name: "めぐみん",
                 platform: "line",
                 user_id: msg.content.from.toString()
@@ -33,7 +39,7 @@ app.post('/callback', function(req, res) {
                 if (err || !res.ok) {
                     console.error(err);
                 } else {
-                    console.log(res)
+                    //console.log(res)
 
                     request
                         .post('https://trialbot-api.line.me/v1/events')
