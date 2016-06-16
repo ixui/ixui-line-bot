@@ -30,7 +30,7 @@ app.post('/callback', function(req, res) {
                 if (err || !res.ok) {
                     console.error(err);
                 } else {
-
+                    console.log(res.body.result)
                     request
                         .post('https://trialbot-api.line.me/v1/events')
                         .proxy(process.env.FIXIE_URL)
@@ -38,7 +38,7 @@ app.post('/callback', function(req, res) {
                             to: [msg.content.from.toString()],
                             toChannel: 1383378250,
                             eventType: "138311608800106203",
-                            content: res.body.result
+                            content: encodeURI(res.body.result)
                         })
                         .set('Content-Type', 'application/json; charset=UTF-8')
                         .set('X-Line-ChannelID', process.env.CHANNEL_ID)
