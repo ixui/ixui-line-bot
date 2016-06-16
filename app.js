@@ -56,7 +56,7 @@ app.post('/callback', function(req, res) {
                             if (err || !res.ok) {
                                 console.error(err);
                             } else {
-                                console.log(res)
+                                // Nothing
                             }
                         });
 
