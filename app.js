@@ -33,6 +33,7 @@ app.post('/callback', function(req, res) {
                 if (err || !res.ok) {
                     console.error(err);
                 } else {
+                    console.log(res)
 
                     request
                         .post('https://trialbot-api.line.me/v1/events')
@@ -55,7 +56,7 @@ app.post('/callback', function(req, res) {
                             if (err || !res.ok) {
                                 console.error(err);
                             } else {
-                                // No Error
+                                console.log(res)
                             }
                         });
 
