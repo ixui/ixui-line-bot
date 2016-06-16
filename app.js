@@ -30,7 +30,7 @@ app.post('/callback', function(req, res) {
             .post('https://chatbot-api.userlocal.jp/api/chat')
             .send({
                 key: process.env.USER_LOCAL_API_KEY,
-                message: encodeURIComponent(msg.content),
+                message: msg.content.text,
                 bot_name: "めぐみん",
                 platform: "line",
                 user_id: msg.content.from.toString()
