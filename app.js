@@ -20,11 +20,9 @@ app.post('/callback', function(req, res) {
         var request = require('superagent');
         require('superagent-proxy')(request);
 
-        console.log("*********************************************************************")
-        console.log(msg.content.text)
-        console.log("*********************************************************************")
-        console.log(msg.content)
-        console.log("*********************************************************************")
+        // console.log("*********************************************************************")
+        // console.log(msg.content)
+        // console.log("*********************************************************************")
 
         request
             .post('https://chatbot-api.userlocal.jp/api/chat')
@@ -63,6 +61,7 @@ app.post('/callback', function(req, res) {
                                 console.error(err);
                             } else {
                                 // Nothing
+                                //console.log(res)
                             }
                         });
 
